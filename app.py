@@ -25,6 +25,12 @@ st.set_page_config(
 )
 
 # ============================================
+# GLOBAL VARIABLES
+# ============================================
+# Define numeric columns globally to avoid NameError
+numeric_columns = ['revolutions', 'humidity', 'vibration', 'x1', 'x2', 'x3', 'x4', 'x5']
+
+# ============================================
 # CUSTOM CSS STYLING
 # ============================================
 st.markdown("""
@@ -41,7 +47,7 @@ st.markdown("""
         font-weight: 700;
         color: #00d4ff;
         text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        margin-bottom: 0.5rem;
+        metric-bottom: 0.5rem;
     }
     
     .header-subtitle {
@@ -143,6 +149,28 @@ st.markdown("""
     ::-webkit-scrollbar-thumb:hover {
         background: #00d4ff;
     }
+    
+    /* Dataframe styling */
+    .stDataFrame {
+        background-color: rgba(15, 39, 68, 0.3) !important;
+        border-radius: 8px;
+    }
+    
+    .stDataFrame table {
+        color: #e2e8f0 !important;
+        background-color: rgba(15, 39, 68, 0.5) !important;
+    }
+    
+    .stDataFrame th {
+        background-color: rgba(0, 212, 255, 0.3) !important;
+        color: #ffffff !important;
+    }
+    
+    .stDataFrame td {
+        background-color: rgba(15, 39, 68, 0.5) !important;
+        color: #e2e8f0 !important;
+        border-color: rgba(0, 212, 255, 0.2) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -164,7 +192,6 @@ def load_and_clean_data(file_path):
     df['vibration'] = df['vibration'].interpolate(method='linear', limit_direction='both')
     
     # Ensure numeric columns are correct type
-    numeric_columns = ['revolutions', 'humidity', 'vibration', 'x1', 'x2', 'x3', 'x4', 'x5']
     for col in numeric_columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
     
