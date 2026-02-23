@@ -563,7 +563,8 @@ sns.heatmap(
 ax.set_title('Feature Correlation Matrix', fontsize=16, color='#00d4ff', pad=20)
 ax.tick_params(axis='x', colors='white', rotation=45)
 ax.tick_params(axis='y', colors='white', rotation=0)
-fig_heatmap.patch.set_facecolor('#000000')
+ax.set_facecolor('#240046')
+fig.patch.set_facecolor('#14001f')
 
 plt.tight_layout()
 st.pyplot(fig_heatmap, use_container_width=True)
