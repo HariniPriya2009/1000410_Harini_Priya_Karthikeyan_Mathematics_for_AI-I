@@ -348,7 +348,7 @@ with col1:
         x='revolutions',
         nbins=50,
         title='Distribution of Revolutions',
-        color_discrete_sequence=['#00d4ff'],
+        color_discrete_sequence=['#c77dff'],
         template='plotly_dark'
     )
     
@@ -373,7 +373,7 @@ with col2:
         x='humidity',
         nbins=50,
         title='Distribution of Humidity',
-        color_discrete_sequence=['#10b981'],
+        color_discrete_sequence=['#9d4edd'],
         template='plotly_dark'
     )
     
@@ -415,7 +415,7 @@ fig_scatter = px.scatter(
     y='vibration',
     color='humidity',
     title='Revolutions vs Vibration Relationship',
-    color_continuous_scale='Viridis',
+    color_continuous_scale='Plasma',
     template='plotly_dark',
     hover_data=['ID']
 )
@@ -550,7 +550,7 @@ sns.heatmap(
     corr_matrix,
     annot=True,
     fmt='.3f',
-    cmap='RdYlGn',
+    cmap='magma',
     center=0,
     square=True,
     linewidths=1,
