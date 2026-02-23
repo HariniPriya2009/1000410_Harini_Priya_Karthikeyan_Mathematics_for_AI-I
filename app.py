@@ -34,48 +34,76 @@ st.markdown("""
 <style>
 
 .stApp {
-    background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
-    color: #e2e8f0;
+    background: linear-gradient(135deg, #14001f 0%, #240046 40%, #3c096c 100%);
+    color: #f1f5f9;
 }
 
-/* Header */
+/* HEADER */
 .header-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #00d4ff;
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #c77dff;
     text-align: center;
+    text-shadow: 0 0 20px rgba(199,125,255,0.6);
 }
 
-/* Section Box */
-.section-box {
-    background: rgba(15, 39, 68, 0.6);
-    padding: 1.5rem;
-    border-radius: 15px;
+.header-subtitle {
+    text-align: center;
+    color: #b8c0ff;
     margin-bottom: 2rem;
-    border: 1px solid rgba(0, 212, 255, 0.3);
 }
 
-/* Metric Cards */
+/* SECTION CONTAINERS */
+.section-container {
+    background: rgba(36, 0, 70, 0.65);
+    padding: 1.5rem;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(199, 125, 255, 0.4);
+    box-shadow: 0 0 25px rgba(199,125,255,0.15);
+}
+
+/* SECTION TITLES */
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #e0aaff;
+    margin-bottom: 1rem;
+}
+
+/* METRIC CARDS */
 div[data-testid="metric-container"] {
-    background: linear-gradient(145deg, #1e3a5f 0%, #0f2744 100%);
-    border-radius: 12px;
+    background: linear-gradient(145deg, #3c096c 0%, #240046 100%);
+    border-radius: 14px;
     padding: 15px;
-    border: 1px solid rgba(0,212,255,0.3);
+    border: 1px solid rgba(199, 125, 255, 0.4);
+    box-shadow: 0 0 20px rgba(199,125,255,0.2);
 }
 
-/* Sidebar */
+/* SIDEBAR */
 section[data-testid="stSidebar"] {
-    background: #0f2744;
+    background: linear-gradient(180deg, #240046 0%, #14001f 100%);
 }
 
-/* Hide Streamlit default */
+/* BUTTONS */
+.stButton>button {
+    background-color: #7b2cbf;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.stButton>button:hover {
+    background-color: #9d4edd;
+    box-shadow: 0 0 15px rgba(199,125,255,0.6);
+}
+
+/* REMOVE DEFAULT STREAMLIT */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
 </style>
-""", unsafe_allow_html=True)
-
-# ============================================
+""", unsafe_allow_html=True)# ============================================
 # DATA LOADING & CLEANING
 # ============================================
 @st.cache_data
