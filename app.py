@@ -103,6 +103,30 @@ div[data-testid="stMetricValue"] {
 }
 
 /* ===============================
+   MATPLOTLIB PLOT STYLING
+=================================*/
+.mpl-plot {
+    background-color: rgba(15, 12, 41, 0.3);
+}
+
+.mpl-plot .grid {
+    color: #8e2de2 !important;
+    opacity: 0.3 !important;
+}
+
+.mpl-plot .axis {
+    color: #b388ff !important;
+}
+
+.mpl-plot .tick {
+    color: #b388ff !important;
+}
+
+.mpl-plot .label {
+    color: #c77dff !important;
+}
+
+/* ===============================
    CUSTOM COLOR CLASSES FOR METRIC LABELS
 =================================*/
 .custom-metric-label {
@@ -521,7 +545,112 @@ with col2:
     st.plotly_chart(fig_hum_dist, use_container_width=True)
 
 # ============================================
-# SECTION 4: BOX PLOT (Sensor Readings x1-x5)
+# SECTION 4: SCATTER PLOT (Revolutions vs Vibration)
+# ============================================
+st.markdown("""
+<div class='section-container'>
+    <div class='section-title'>📈 Scatter Plot - Revolutions vs Vibration</div>
+</div>
+""", unsafe_allow_html=True)
+
+# Create scatter plot
+fig_scatter = go.Figure()
+
+# Add scatter points
+fig_scatter.add_trace(go.Scatter(
+    x=filtered_df['revolutions'],
+    y=filtered_df['vibration'],
+    mode='markers',
+    name='Readings',
+    marker=dict(
+        color='#b388ff',
+        size=6,
+        opacity=0.6,
+        line=dict(color='#fff', width=0.5)
+    ),
+    hovertemplate='<b>Revolutions: %{x:.2f}</b><br>Vibration: %{y:.4f}<extra></extra>'
+))
+
+# Add trend line
+slope, intercept, r_value, p_value, std_err = linregress(filtered_df['revolutions'], filtered_df['vibration'])
+trend_line = slope * filtered_df['revolutions'] + intercept
+
+fig_scatter.add_trace(go.Scatter(
+    x=filtered_df['revolutions'],
+    y=trend_line,
+    mode='lines',
+    name='Trend Line',
+    line=dict(color='#00f0ff', width=2, dash='dash'),
+    hovertemplate='<b>Trend</b><br>Revolutions: %{x:.2f}<br>Vibration: %{y:.4f}<extra></extra>'
+))
+
+fig_scatter.update_layout(
+    title=dict(
+        text="Relationship Between Revolutions and Vibration",
+        font=dict(size=18, color='#00f0ff', family='Arial Black')
+    ),
+    xaxis=dict(
+        title=dict(
+            text="Revolutions",
+            font=dict(size=14, color='#c77dff', family='Arial')
+        ),
+        tickfont=dict(size=12, color='#b388ff'),
+        gridcolor='#8e2de2',
+        gridwidth=0.5,
+        griddash='dash'
+    ),
+    yaxis=dict(
+        title=dict(
+            text="Vibration Level",
+            font=dict(size=14, color='#c77dff', family='Arial')
+        ),
+        tickfont=dict(size=12, color='#b388ff'),
+        gridcolor='#8e2de2',
+        gridwidth=0.5,
+        griddash='dash'
+    ),
+    height=450,
+    plot_bgcolor='rgba(15, 12, 41, 0.3)',
+    paper_bgcolor='rgba(15, 12, 41, 0.3)',
+    font=dict(color='#b388ff'),
+    showlegend=True,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1,
+        font=dict(size=12, color='#b388ff')
+    )
+)
+
+st.plotly_chart(fig_scatter, use_container_width=True)
+
+# Display correlation information
+st.markdown("### 📊 Correlation Analysis")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric(
+        label="Correlation Coefficient",
+        value=f"{r_value:.4f}",
+        help="Strength of relationship between revolutions and vibration"
+    )
+with col2:
+    st.metric(
+        label="R-Squared",
+        value=f"{r_value**2:.4f}",
+        help="Percentage of variance explained by the relationship"
+    )
+with col3:
+    relationship_type = "Strong Positive" if r_value > 0.7 else "Moderate Positive" if r_value > 0.3 else "Weak Positive" if r_value > 0 else "Weak Negative" if r_value > -0.3 else "Moderate Negative" if r_value > -0.7 else "Strong Negative"
+    st.metric(
+        label="Relationship Type",
+        value=relationship_type,
+        help="Nature of the relationship"
+    )
+
+# ============================================
+# SECTION 5: BOX PLOT (Sensor Readings x1-x5)
 # ============================================
 st.markdown("""
 <div class='section-container'>
@@ -561,6 +690,10 @@ ax.xaxis.label.set_color('#b388ff')
 ax.yaxis.label.set_color('#b388ff')
 ax.title.set_color('#b388ff')
 
+# Add visible grid lines
+ax.grid(True, color='#8e2de2', alpha=0.3, linestyle='--', linewidth=0.5)
+ax.set_axisbelow(True)
+
 # Set background
 ax.set_facecolor('#0f0c29')
 fig.patch.set_facecolor('#0a001a')
@@ -597,7 +730,7 @@ st.dataframe(
 )
 
 # ============================================
-# SECTION 5: CORRELATION HEATMAP
+# SECTION 6: CORRELATION HEATMAP
 # ============================================
 st.markdown("""
 <div class='section-container'>
@@ -634,7 +767,7 @@ plt.tight_layout()
 st.pyplot(fig_heatmap, use_container_width=True)
 
 # ============================================
-# SECTION 6: ANOMALY DETECTION
+# SECTION 7: ANOMALY DETECTION
 # ============================================
 st.markdown("""
 <div class='section-container'>
@@ -742,7 +875,7 @@ else:
     st.success("✅ No anomalies detected above the threshold!")
 
 # ============================================
-# SECTION 7: INSIGHTS PANEL
+# SECTION 8: INSIGHTS PANEL
 # ============================================
 st.markdown("""
 <div class='section-container'>
