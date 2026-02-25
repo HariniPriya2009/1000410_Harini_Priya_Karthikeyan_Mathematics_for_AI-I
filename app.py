@@ -103,6 +103,24 @@ div[data-testid="stMetricValue"] {
 }
 
 /* ===============================
+   CUSTOM COLOR CLASSES FOR METRIC LABELS
+=================================*/
+.custom-metric-label {
+    color: #00f0ff !important;
+    font-weight: 600;
+    text-shadow: 0 0 8px #00f0ff;
+}
+
+/* ===============================
+   CUSTOM COLOR CLASSES FOR SIDEBAR HEADINGS
+=================================*/
+.custom-sidebar-heading {
+    color: #00f0ff !important;
+    font-weight: 600;
+    text-shadow: 0 0 8px #00f0ff;
+}
+
+/* ===============================
    SIDEBAR
 =================================*/
 section[data-testid="stSidebar"] {
@@ -206,9 +224,10 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 # Revolutions range slider
+st.sidebar.markdown("<p class='custom-sidebar-heading'>🔄 Revolutions Range</p>", unsafe_allow_html=True)
 min_rev, max_rev = float(df['revolutions'].min()), float(df['revolutions'].max())
 rev_range = st.sidebar.slider(
-    "🔄 Revolutions Range",
+    "",
     min_value=min_rev,
     max_value=max_rev,
     value=(min_rev, max_rev),
@@ -217,9 +236,10 @@ rev_range = st.sidebar.slider(
 )
 
 # Humidity range slider
+st.sidebar.markdown("<p class='custom-sidebar-heading'>💧 Humidity Range (%)</p>", unsafe_allow_html=True)
 min_hum, max_hum = float(df['humidity'].min()), float(df['humidity'].max())
 hum_range = st.sidebar.slider(
-    "💧 Humidity Range (%)",
+    "",
     min_value=min_hum,
     max_value=max_hum,
     value=(min_hum, max_hum),
@@ -228,8 +248,9 @@ hum_range = st.sidebar.slider(
 )
 
 # Vibration threshold slider
+st.sidebar.markdown("<p class='custom-sidebar-heading'>📊 Vibration Threshold</p>", unsafe_allow_html=True)
 vib_threshold = st.sidebar.slider(
-    "📊 Vibration Threshold",
+    "",
     min_value=float(df['vibration'].min()),
     max_value=float(df['vibration'].max()),
     value=float(df['vibration'].quantile(0.95)),
@@ -277,8 +298,9 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     avg_vib = filtered_df['vibration'].mean()
+    st.markdown("<p class='custom-metric-label'>Average Vibration</p>", unsafe_allow_html=True)
     st.metric(
-        label="Average Vibration",
+        label="",
         value=f"{avg_vib:.4f}",
         delta=f"{(avg_vib/df['vibration'].mean()*100)-100:.1f}%",
         help="Mean vibration level across all readings"
@@ -286,8 +308,9 @@ with col1:
 
 with col2:
     max_vib = filtered_df['vibration'].max()
+    st.markdown("<p class='custom-metric-label'>Max Vibration</p>", unsafe_allow_html=True)
     st.metric(
-        label="Max Vibration",
+        label="",
         value=f"{max_vib:.4f}",
         delta=f"{(max_vib/df['vibration'].max()*100)-100:.1f}%",
         help="Maximum vibration reading"
@@ -295,8 +318,9 @@ with col2:
 
 with col3:
     avg_rev = filtered_df['revolutions'].mean()
+    st.markdown("<p class='custom-metric-label'>Avg Revolutions</p>", unsafe_allow_html=True)
     st.metric(
-        label="Avg Revolutions",
+        label="",
         value=f"{avg_rev:.2f}",
         delta=f"{(avg_rev/df['revolutions'].mean()*100)-100:.1f}%",
         help="Average revolutions per reading"
@@ -304,8 +328,9 @@ with col3:
 
 with col4:
     avg_hum = filtered_df['humidity'].mean()
+    st.markdown("<p class='custom-metric-label'>Humidity</p>", unsafe_allow_html=True)
     st.metric(
-        label="Avg Humidity",
+        label="",
         value=f"{avg_hum:.2f}%",
         delta=f"{(avg_hum/df['humidity'].mean()*100)-100:.1f}%",
         help="Average humidity percentage"
