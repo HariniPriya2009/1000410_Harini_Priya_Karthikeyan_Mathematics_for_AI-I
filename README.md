@@ -4,6 +4,10 @@ Smart Elevator Predictive Maintenance Dashboard
 
 A production-ready Streamlit application for real-time elevator system monitoring and predictive maintenance analysis.
 
+App live link: https://1000410-harini-priya-karthikeyan-mathematics-for-ai.streamlit.app/
+
+Canva Story Board link: https://www.canva.com/design/DAHCUVu_wMA/i8dsdvuy-J02t3VXm6gFMA/view?utm_content=DAHCUVu_wMA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b4fcdae3
+
 What Does This Web App Visualize?
 
 This dashboard provides comprehensive visualization and analysis of elevator system sensor data to enable predictive maintenance. It visualizes:
@@ -306,7 +310,14 @@ The dashboard uses a neon purple theme. To customize colors, modify the CSS sect
 
 - Suitable for sensitive operational data
 
-Cr
-mization and UI improvements
+Credits
 
-Built with ❤️ using Streamlit
+Created by: Harini Priya Karthikeyan (ID: 1000410)
+
+CRS: Artificial Intelligence: 
+
+Course Name: Mathematics for AI-I
+
+Mentor: Syed Ali Beema.S
+
+School: Jain Vidyalaya IB world school, Madurai
