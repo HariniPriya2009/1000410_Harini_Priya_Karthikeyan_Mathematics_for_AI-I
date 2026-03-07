@@ -1,6 +1,4 @@
-# 1000410_Harini_Priya_Karthikeyan_Math_in_AI
-
-Smart Elevator Predictive Maintenance Dashboard
+# Smart Elevator Predictive Maintenance Dashboard
 
 A production-ready Streamlit application for real-time elevator system monitoring and predictive maintenance analysis.
 
